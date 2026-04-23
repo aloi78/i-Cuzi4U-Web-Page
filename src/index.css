@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Varela+Round&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0D49CD;
+  --color-action: #3AD2FF;
+  --color-typography: #333333;
+  --color-app-bg: #F9F9F9;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-logo: "Varela Round", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-app-bg text-typography font-sans;
+  }
+}
+
+.app-card {
+  @apply bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md;
+}
+
+.btn-primary {
+  @apply bg-action text-primary font-bold py-4 px-8 rounded-full flex items-center justify-center gap-2 transition-transform active:scale-95;
+}
+
+.sticky-header {
+  @apply sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100;
+}

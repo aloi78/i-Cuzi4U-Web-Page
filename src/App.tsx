@@ -41,7 +41,7 @@ export default function App() {
   ];
 
   const getAssetPath = (path: string) => {
-    if (path.startsWith('http') || path.startsWith('data:')) return path;
+    if (path.startsWith('https') || path.startsWith('data:')) return path;
     const cleanPath = path.startsWith('./') ? path.slice(1) : path;
     // Using absolute root paths for reliability in the preview environment
     return `/${cleanPath}`;

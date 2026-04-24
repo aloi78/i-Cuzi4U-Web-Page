@@ -89,9 +89,10 @@ export default function App() {
         <div className="container mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img 
-              src={`${import.meta.env.BASE_URL}logo.png`.replace(/\/+/g, '/')} 
+              src="logo.png" 
               alt="i-Cuzi4U Logo" 
               className="h-[52px] w-auto"
+              referrerPolicy="no-referrer"
               onError={(e) => {
                 // Fallback if logo is not found
                 e.currentTarget.style.display = 'none';
@@ -294,9 +295,10 @@ export default function App() {
                   >
                     {/* Background Image */}
                     <img 
-                      src={`${import.meta.env.BASE_URL}${service.image}`.replace(/\/+/g, '/')} 
+                      src={service.image} 
                       alt={t(`services.${service.id}.title`)}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
                     />
                     
                     {/* Overlay */}
@@ -445,9 +447,10 @@ export default function App() {
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-2 mb-6">
                 <img 
-                  src={`${import.meta.env.BASE_URL}logo.png`.replace(/\/+/g, '/')} 
+                  src="logo.png" 
                   alt="i-Cuzi4U Logo" 
                   className="h-[42px] w-auto"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     e.currentTarget.nextElementSibling?.classList.remove('hidden');

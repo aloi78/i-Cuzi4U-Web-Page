@@ -41,10 +41,11 @@ export default function App() {
   ];
 
   const getAssetPath = (path: string) => {
+    if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
-    const base = import.meta.env.BASE_URL;
-    const cleanBase = base === './' ? '' : base;
+    const base = import.meta.env.BASE_URL || '/';
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanBase = base.endsWith('/') ? base : `${base}/`;
     return `${cleanBase}${cleanPath}`;
   };
 

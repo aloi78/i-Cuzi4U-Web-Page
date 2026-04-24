@@ -12,7 +12,7 @@ export const SERVICES = [
     description: 'Dust mite and allergen focus for a healthier sleep.',
     price: 'From RM150',
     icon: 'Bed',
-    image: '/mattress.jpg',
+    image: 'mattress.jpg',
   },
   {
     id: 'sofa',
@@ -20,7 +20,7 @@ export const SERVICES = [
     description: 'Specialized tracks for Fabric and Leather upholstery.',
     price: 'From RM120',
     icon: 'Armchair',
-    image: '/sofa.jpg',
+    image: 'sofa.jpg',
   },
   {
     id: 'car-seat',
@@ -28,7 +28,7 @@ export const SERVICES = [
     description: 'Interior sanitization and odor removal for your vehicle.',
     price: 'From RM80',
     icon: 'Car',
-    image: '/car-seat.jpg',
+    image: 'car-seat.jpg',
   },
   {
     id: 'curtain',
@@ -36,7 +36,7 @@ export const SERVICES = [
     description: 'On-site steam cleaning without dismantling.',
     price: 'From RM100',
     icon: 'Wind',
-    image: '/curtain.jpg',
+    image: 'curtain.jpg',
   },
   {
     id: 'carpet',
@@ -44,7 +44,7 @@ export const SERVICES = [
     description: 'Deep extraction for home rugs and office carpets.',
     price: 'From RM1.50/sqft',
     icon: 'Waves',
-    image: '/carpet.jpg',
+    image: 'carpet.jpg',
   },
 ];
 

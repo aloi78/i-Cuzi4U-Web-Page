@@ -43,8 +43,10 @@ export default function App() {
   const getAssetPath = (path: string) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
-    // For relative base (./), we return the path without a leading slash
-    return path.startsWith('/') ? path.slice(1) : path;
+    const base = import.meta.env.BASE_URL || '/';
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const result = base.endsWith('/') ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
+    return result;
   };
 
   const changeLanguage = (lng: string) => {

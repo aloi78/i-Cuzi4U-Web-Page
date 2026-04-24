@@ -42,10 +42,9 @@ export default function App() {
 
   const getAssetPath = (path: string) => {
     if (path.startsWith('http') || path.startsWith('data:')) return path;
-    const base = import.meta.env.BASE_URL;
-    const cleanBase = base === './' ? '' : base;
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-    return `${cleanBase}${cleanPath}`;
+    // Using absolute root paths for reliability in the preview environment
+    return `/${cleanPath}`;
   };
 
   const changeLanguage = (lng: string) => {
@@ -100,7 +99,6 @@ export default function App() {
               src={getAssetPath('logo.png')} 
               alt="i-Cuzi4U Logo" 
               className="h-[52px] w-auto"
-              referrerPolicy="no-referrer"
               onError={(e) => {
                 // Fallback if logo is not found
                 e.currentTarget.style.display = 'none';
@@ -306,7 +304,6 @@ export default function App() {
                       src={getAssetPath(service.image)} 
                       alt={t(`services.${service.id}.title`)}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
                     />
                     
                     {/* Overlay */}
@@ -458,7 +455,6 @@ export default function App() {
                   src={getAssetPath('logo.png')} 
                   alt="i-Cuzi4U Logo" 
                   className="h-[42px] w-auto"
-                  referrerPolicy="no-referrer"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     e.currentTarget.nextElementSibling?.classList.remove('hidden');

@@ -43,10 +43,9 @@ export default function App() {
   const getAssetPath = (path: string) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
-    const base = import.meta.env.BASE_URL || '/';
+    const base = import.meta.env.BASE_URL || './';
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-    const result = base.endsWith('/') ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
-    return result;
+    return base.endsWith('/') ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
   };
 
   const changeLanguage = (lng: string) => {
@@ -101,11 +100,7 @@ export default function App() {
               src={getAssetPath('logo.png')} 
               alt="i-Cuzi4U Logo" 
               className="h-[52px] w-auto"
-              onError={(e) => {
-                // Fallback if logo is not found
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.remove('hidden');
-              }}
+              referrerPolicy="no-referrer"
             />
             <div className="hidden w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">i</div>
             <span className="text-2xl font-bold font-logo text-primary tracking-tight">i-Cuzi<span className="text-[#FFD800]">4</span><span className="text-[#3AD2FF]">U</span></span>
@@ -306,6 +301,7 @@ export default function App() {
                       src={getAssetPath(service.image)} 
                       alt={t(`services.${service.id}.title`)}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
                     />
                     
                     {/* Overlay */}
@@ -457,10 +453,7 @@ export default function App() {
                   src={getAssetPath('logo.png')} 
                   alt="i-Cuzi4U Logo" 
                   className="h-[42px] w-auto"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                  }}
+                  referrerPolicy="no-referrer"
                 />
                 <div className="hidden w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">i</div>
                 <span className="text-xl font-bold font-logo text-primary">i-Cuzi<span className="text-[#FFD800]">4</span><span className="text-[#3AD2FF]">U</span></span>

@@ -43,19 +43,8 @@ export default function App() {
   const getAssetPath = (path: string) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
-    
-    // In Vite, import.meta.env.BASE_URL is the configured 'base' path
-    const base = import.meta.env.BASE_URL;
-    
-    // Fix common mistake: path should not include 'public/' prefix in production
-    let cleanPath = path;
-    if (cleanPath.startsWith('public/')) {
-      cleanPath = cleanPath.replace('public/', '');
-    }
-    if (cleanPath.startsWith('/')) {
-      cleanPath = cleanPath.slice(1);
-    }
-    
+    const base = import.meta.env.BASE_URL || './';
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
     return base.endsWith('/') ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
   };
 

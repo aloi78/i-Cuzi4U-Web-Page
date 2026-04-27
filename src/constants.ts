@@ -5,7 +5,7 @@ export const COLORS = {
   bg: '#F9F9F9',      // Light Gray
 };
 
-export const LOGO_URL = 'https://drive.google.com/uc?id=1837fEh1D-5nM94fUeES3ldp3A8OpSokg';
+export const LOGO_URL = 'https://lh3.googleusercontent.com/d/1837fEh1D-5nM94fUeES3ldp3A8OpSokg';
 
 export const SERVICES = [
   {
@@ -14,7 +14,7 @@ export const SERVICES = [
     description: 'Dust mite and allergen focus for a healthier sleep.',
     price: 'From RM150',
     icon: 'Bed',
-    image: 'https://drive.google.com/uc?id=1aox3sVNT3A2ng0WRMhhDO1Fdc-ms8zsH',
+    image: 'https://lh3.googleusercontent.com/d/1aox3sVNT3A2ng0WRMhhDO1Fdc-ms8zsH',
   },
   {
     id: 'sofa',
@@ -22,7 +22,7 @@ export const SERVICES = [
     description: 'Specialized tracks for Fabric and Leather upholstery.',
     price: 'From RM120',
     icon: 'Armchair',
-    image: 'https://drive.google.com/uc?id=1mihf8YH6_ZrypGBGnlMswhJCvEzY4Qcb',
+    image: 'https://lh3.googleusercontent.com/d/1mihf8YH6_ZrypGBGnlMswhJCvEzY4Qcb',
   },
   {
     id: 'car-seat',
@@ -30,7 +30,7 @@ export const SERVICES = [
     description: 'Interior sanitization and odor removal for your vehicle.',
     price: 'From RM80',
     icon: 'Car',
-    image: 'https://drive.google.com/uc?id=1nF1FCx-D5wv2-PXy5z807saXY3qKl9am',
+    image: 'https://lh3.googleusercontent.com/d/1nF1FCx-D5wv2-PXy5z807saXY3qKl9am',
   },
   {
     id: 'curtain',
@@ -38,7 +38,7 @@ export const SERVICES = [
     description: 'On-site steam cleaning without dismantling.',
     price: 'From RM100',
     icon: 'Wind',
-    image: 'https://drive.google.com/uc?id=1fEW3tYJj42TKajnCsz3N12HT0-wfu65J',
+    image: 'https://lh3.googleusercontent.com/d/1fEW3tYJj42TKajnCsz3N12HT0-wfu65J',
   },
   {
     id: 'carpet',
@@ -46,7 +46,7 @@ export const SERVICES = [
     description: 'Deep extraction for home rugs and office carpets.',
     price: 'From RM1.50/sqft',
     icon: 'Waves',
-    image: 'https://drive.google.com/uc?id=1aS8s_ScBV6GMikA0FfwzMtJQ_DCY0G1Q',
+    image: 'https://lh3.googleusercontent.com/d/1aS8s_ScBV6GMikA0FfwzMtJQ_DCY0G1Q',
   },
 ];
 

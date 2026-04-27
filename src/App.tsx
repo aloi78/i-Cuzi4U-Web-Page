@@ -362,10 +362,10 @@ export default function App() {
                   </div>
                 </div>
                 {/* Floating Badge */}
-                <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-[200px]">
+                <div className="absolute -bottom-20 md:-bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-[250px]">
                   <div className="flex items-center gap-2 text-action mb-2">
                     <CheckCircle2 size={20} />
-                    <span className="absolute top-4 right-4 px-3 py-1 bg-[#FFD800] font-bold text-primary rounded-full" >{t('process.karcher_tech')}</span>
+                    <span className="absolute top-4 left-15 px-3 py-1 bg-[#FFD800] font-bold text-primary rounded-full" >{t('process.karcher_tech')}</span>
                   </div>
                   <p className="text-xs text-gray-500">{t('process.karcher_desc')}</p>
                 </div>

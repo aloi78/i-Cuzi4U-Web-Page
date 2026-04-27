@@ -18,7 +18,7 @@ import {
   Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { SERVICES, PACKAGES, WHATSAPP_LINK } from './constants';
+import { SERVICES, PACKAGES, WHATSAPP_LINK, LOGO_URL } from './constants';
 
 const IconMap: Record<string, any> = {
   Bed,
@@ -97,7 +97,7 @@ export default function App() {
         <div className="container mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img 
-              src={getAssetPath('logo.png')} 
+              src={getAssetPath(LOGO_URL)} 
               alt="i-Cuzi4U Logo" 
               className="h-[52px] w-auto"
               referrerPolicy="no-referrer"
@@ -450,7 +450,7 @@ export default function App() {
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-2 mb-6">
                 <img 
-                  src={getAssetPath('logo.png')} 
+                  src={getAssetPath(LOGO_URL)} 
                   alt="i-Cuzi4U Logo" 
                   className="h-[42px] w-auto"
                   referrerPolicy="no-referrer"

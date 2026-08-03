@@ -72,7 +72,7 @@ export default function SofaCleaningPage({ onBack, onWhatsApp }: SofaCleaningPag
       titleKey: 'sofa_page.sizes.queen_title',
       priceKey: 'sofa_page.sizes.queen_price',
       featuresKey: 'sofa_page.sizes.queen_features',
-      msg: '2 to 3 Seater Sofa',
+      msg: '2 Seater Sofa',
       featured: true
     },
     {
@@ -80,7 +80,7 @@ export default function SofaCleaningPage({ onBack, onWhatsApp }: SofaCleaningPag
       titleKey: 'sofa_page.sizes.king_title',
       priceKey: 'sofa_page.sizes.king_price',
       featuresKey: 'sofa_page.sizes.king_features',
-      msg: 'L-Shape / Large Sofa'
+      msg: '3 Seater Sofa'
     }
   ];
 
@@ -391,10 +391,16 @@ export default function SofaCleaningPage({ onBack, onWhatsApp }: SofaCleaningPag
             ))}
           </div>
 
-          {/* Pricing Note */}
-          <p className="mt-8 text-center text-xs md:text-sm text-gray-500 font-medium italic leading-relaxed px-4">
-            {t('sofa_page.pricing_note')}
-          </p>
+          {/* Pricing Note & Add-on Condition */}
+          <div className="mt-8 flex flex-col items-center gap-3 max-w-2xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/5 text-primary font-bold text-xs md:text-sm border border-primary/15 shadow-xs">
+              <span className="text-action">✦</span>
+              <span>{t('sofa_page.pricing_addon')}</span>
+            </div>
+            <p className="text-xs md:text-sm text-gray-500 font-medium italic leading-relaxed px-4">
+              {t('sofa_page.pricing_note')}
+            </p>
+          </div>
         </div>
       </section>
 

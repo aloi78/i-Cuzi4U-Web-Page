@@ -16,7 +16,8 @@ import {
   Menu,
   X,
   ArrowRight,
-  Globe
+  Globe,
+  Clock
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SERVICES, PACKAGES, WHATSAPP_LINK, LOGO_URL } from './constants';
@@ -41,6 +42,25 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'privacy' | 'mattress' | 'sofa' | 'car-seat' | 'curtain' | 'carpet'>('home');
+  const [comingSoonModalService, setComingSoonModalService] = useState<{ id: string; title: string } | null>(null);
+
+  const handleServiceClick = (service: typeof SERVICES[number]) => {
+    if (service.comingSoon || (service as any).comingSoon) {
+      setComingSoonModalService({
+        id: service.id,
+        title: t(`services.${service.id}.title`)
+      });
+      return;
+    }
+    if (service.id === 'mattress') navigateTo('mattress');
+    else if (service.id === 'sofa') navigateTo('sofa');
+    else if (service.id === 'car-seat') navigateTo('car-seat');
+    else if (service.id === 'curtain') navigateTo('curtain');
+    else if (service.id === 'carpet') navigateTo('carpet');
+    else {
+      handleWhatsAppClick(`Hi i-Cuzi4U, I'm interested in ${t(`services.${service.id}.title`)}. Please provide a quote.`);
+    }
+  };
 
   const languages = [
     { code: 'en', name: 'English' },
@@ -459,20 +479,14 @@ export default function App() {
               <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                   <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">{renderBrandText(t('services.title'))}</h2>
-                  <p className="text-gray-600 max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6">{renderBrandText(t('services.desc'))}</p>
-                  <div className="flex flex-wrap justify-center gap-2 md:gap-3 max-w-4xl mx-auto">
-                    {SERVICES.map((service) => (
-                      <span key={service.id} className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white border border-gray-200 rounded-full text-xs md:text-sm font-bold text-primary shadow-sm hover:border-primary/50 transition-all duration-300">
-                        <span className="w-2 h-2 rounded-full bg-[#3AD2FF]" />
-                        {t(`services.${service.id}.title`)}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-gray-600 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">{renderBrandText(t('services.desc'))}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                    {SERVICES.map((service, index) => {
                      const Icon = IconMap[service.icon];
+                     const isComingSoon = Boolean(service.comingSoon);
+
                      return (
                        <motion.div
                          key={service.id}
@@ -481,46 +495,49 @@ export default function App() {
                          viewport={{ once: true }}
                          transition={{ delay: index * 0.1 }}
                          className="relative min-h-[360px] h-full rounded-3xl overflow-hidden group cursor-pointer shadow-lg"
-                         onClick={() => {
-                           if (service.id === 'mattress') {
-                             navigateTo('mattress');
-                           } else if (service.id === 'sofa') {
-                             navigateTo('sofa');
-                           } else if (service.id === 'car-seat') {
-                             navigateTo('car-seat');
-                           } else if (service.id === 'curtain') {
-                             navigateTo('curtain');
-                           } else if (service.id === 'carpet') {
-                             navigateTo('carpet');
-                           } else {
-                             handleWhatsAppClick(`Hi i-Cuzi4U, I'm interested in ${t(`services.${service.id}.title`)}. Please provide a quote.`);
-                           }
-                         }}
+                         onClick={() => handleServiceClick(service)}
                        >
                         {/* Background Image */}
                         <img 
                           src={getAssetPath(service.image)} 
                           alt={t(`seo.${service.id}_alt`)}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${isComingSoon ? 'brightness-90' : ''}`}
                           referrerPolicy="no-referrer"
                         />
                         
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent" />
+
+                        {/* Coming Soon Top Badge */}
+                        {isComingSoon && (
+                          <div className="absolute top-4 right-4 bg-[#FFD800] text-primary font-extrabold text-xs uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-md flex items-center gap-1.5 z-20 border border-[#FFD800]/50">
+                            <Clock size={14} className="animate-pulse" />
+                            <span>{t('services.coming_soon')}</span>
+                          </div>
+                        )}
                         
                         {/* Content */}
-                        <div className="relative h-full p-8 flex flex-col justify-end text-white">
+                        <div className="relative h-full p-8 flex flex-col justify-end text-white z-10">
                           <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-4">
                             <Icon size={24} />
                           </div>
-                          <h3 className="text-2xl font-bold mb-2">{t(`services.${service.id}.title`)}</h3>
+                          <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                            <span>{t(`services.${service.id}.title`)}</span>
+                          </h3>
                           <p className="text-white/80 text-sm mb-6">{t(`services.${service.id}.desc`)}</p>
                           <div className="flex items-center justify-between">
                             <span className="text-[#FFD800] font-bold">{t('services.from')} {service.price.split('From ')[1] || service.price}</span>
-                            <div className="flex items-center gap-1 font-bold text-sm">
-                              <span>{t('services.book_now')}</span>
-                              <ArrowRight size={16} />
-                            </div>
+                            {isComingSoon ? (
+                              <div className="flex items-center gap-1.5 font-extrabold text-xs md:text-sm bg-[#FFD800] text-primary px-3.5 py-1.5 rounded-full shadow-md hover:bg-white transition-colors">
+                                <Clock size={14} />
+                                <span>{t('services.coming_soon')}</span>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-1 font-bold text-sm">
+                                <span>{t('services.book_now')}</span>
+                                <ArrowRight size={16} />
+                              </div>
+                            )}
                           </div>
                         </div>
                       </motion.div>
@@ -657,28 +674,15 @@ export default function App() {
                 {SERVICES.map(s => (
                   <li key={s.id}>
                     <button 
-                      onClick={() => {
-                        if (s.id === 'mattress') {
-                          navigateTo('mattress');
-                        } else if (s.id === 'sofa') {
-                          navigateTo('sofa');
-                        } else if (s.id === 'car-seat') {
-                          navigateTo('car-seat');
-                        } else if (s.id === 'curtain') {
-                          navigateTo('curtain');
-                        } else if (s.id === 'carpet') {
-                          navigateTo('carpet');
-                        } else {
-                          navigateTo('home');
-                          setTimeout(() => {
-                            const el = document.getElementById('services');
-                            if (el) el.scrollIntoView({ behavior: 'smooth' });
-                          }, 100);
-                        }
-                      }}
-                      className="hover:text-primary transition-colors text-left cursor-pointer"
+                      onClick={() => handleServiceClick(s)}
+                      className="hover:text-primary transition-colors text-left cursor-pointer flex items-center gap-2"
                     >
-                      {t(`services.${s.id}.title`)}
+                      <span>{t(`services.${s.id}.title`)}</span>
+                      {s.comingSoon && (
+                        <span className="text-[10px] bg-[#FFD800] text-primary px-1.5 py-0.5 rounded-full font-extrabold uppercase">
+                          {t('services.coming_soon')}
+                        </span>
+                      )}
                     </button>
                   </li>
                 ))}
@@ -729,6 +733,53 @@ export default function App() {
       >
         <MessageCircle size={32} />
       </button>
+
+      {/* Coming Soon Modal Notification */}
+      <AnimatePresence>
+        {comingSoonModalService && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/70 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-gray-100 text-center overflow-hidden"
+            >
+              <button 
+                onClick={() => setComingSoonModalService(null)}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close"
+              >
+                <X size={20} />
+              </button>
+              
+              <div className="w-16 h-16 bg-[#FFD800]/20 text-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Clock size={32} className="text-[#0D49CD]" />
+              </div>
+
+              <span className="inline-block px-3.5 py-1 bg-[#FFD800] text-primary text-xs font-extrabold rounded-full uppercase tracking-wider mb-2">
+                {t('services.coming_soon')}
+              </span>
+
+              <h3 className="text-2xl font-extrabold text-primary mb-3">
+                {t('services.modal_title')}
+              </h3>
+
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
+                {t('services.modal_desc', { serviceTitle: comingSoonModalService.title })}
+              </p>
+
+              <div>
+                <button
+                  onClick={() => setComingSoonModalService(null)}
+                  className="bg-primary text-white font-bold py-3.5 px-6 rounded-full text-sm hover:opacity-90 transition-opacity w-full shadow-md cursor-pointer"
+                >
+                  {t('services.modal_close')}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

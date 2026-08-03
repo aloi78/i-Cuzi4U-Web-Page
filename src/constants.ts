@@ -22,7 +22,7 @@ export const SERVICES = [
     id: 'sofa',
     title: 'Sofa Cleaning',
     description: 'Specialized deep shampooing and stain extraction restoring both fabric and genuine leather upholstery to pristine condition.',
-    price: 'From RM55',
+    price: 'From RM100',
     icon: 'Armchair',
     image: 'https://lh3.googleusercontent.com/d/1mihf8YH6_ZrypGBGnlMswhJCvEzY4Qcb',
   },
@@ -33,6 +33,7 @@ export const SERVICES = [
     price: 'From RM140',
     icon: 'Car',
     image: 'https://lh3.googleusercontent.com/d/1nF1FCx-D5wv2-PXy5z807saXY3qKl9am',
+    comingSoon: true,
   },
   {
     id: 'curtain',
@@ -57,6 +58,7 @@ export const SERVICES = [
     price: 'From RM180',
     icon: 'CookingPot',
     image: 'https://lh3.googleusercontent.com/d/1Gesd4i2XwHHtWBGWnVOzOcMdZTOm4aDP',
+    comingSoon: true,
   },
 ];
 

@@ -4,6 +4,7 @@ import {
   MessageCircle, 
   ShieldCheck, 
   Check, 
+  X,
   Sparkles, 
   AlertTriangle,
   HelpCircle,
@@ -368,13 +369,32 @@ export default function CarCleaningPage({ onBack, onWhatsApp }: CarCleaningPageP
                   <div className="flex items-baseline gap-1 mb-6">
                     <span className="text-3xl md:text-4xl font-extrabold text-primary">{t(sz.priceKey)}</span>
                   </div>
-                  <div className="border-t border-gray-100 pt-6 space-y-3.5 mb-8">
-                    {(t(sz.featuresKey, { returnObjects: true }) as string[]).map((feature, fIdx) => (
-                      <div key={fIdx} className="flex items-center gap-2.5 text-sm text-gray-600">
-                        <Check size={16} className="text-action flex-shrink-0" />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
+                  <div className="border-t border-gray-100 pt-6 space-y-3 mb-8">
+                    {(t(sz.featuresKey, { returnObjects: true }) as Array<string | { text: string; included: boolean }>).map((featureItem, fIdx) => {
+                      const isObject = typeof featureItem === 'object' && featureItem !== null;
+                      const text = isObject ? featureItem.text : featureItem;
+                      const isIncluded = isObject ? featureItem.included : true;
+
+                      return (
+                        <div key={fIdx} className="flex items-center justify-between text-xs md:text-sm gap-2">
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            {isIncluded ? (
+                              <Check size={16} className="text-action flex-shrink-0" />
+                            ) : (
+                              <X size={16} className="text-red-400 flex-shrink-0" />
+                            )}
+                            <span className={isIncluded ? "text-gray-700 font-medium" : "text-gray-400 font-normal line-through decoration-gray-300"}>
+                              {text}
+                            </span>
+                          </div>
+                          {!isIncluded && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider bg-red-50 text-red-500 px-2 py-0.5 rounded border border-red-100/80 shrink-0">
+                              {t('car_page.not_included_tag')}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <button 
@@ -390,6 +410,45 @@ export default function CarCleaningPage({ onBack, onWhatsApp }: CarCleaningPageP
                 </button>
               </div>
             ))}
+          </div>
+
+          {/* Optional Add-ons Section */}
+          <div className="mt-12 max-w-5xl mx-auto bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-action/15 text-primary flex items-center justify-center shrink-0">
+                  <Sparkles size={20} className="text-[#0D49CD]" />
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-extrabold text-primary">
+                    {t('car_page.addons_title')}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-500 font-medium">
+                    {t('car_page.addons_subtitle')}
+                  </p>
+                </div>
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold border border-primary/10 self-start sm:self-auto">
+                ✦ targeted cleaning
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {(t('car_page.addons_items', { returnObjects: true }) as Array<{ label: string; price: string }>).map((item, idx) => (
+                <div 
+                  key={idx}
+                  className="flex items-center justify-between p-4 rounded-2xl bg-app-bg border border-gray-100/80 hover:border-primary/20 transition-colors group"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                    <span className="w-2 h-2 rounded-full bg-[#3AD2FF] shrink-0 group-hover:scale-125 transition-transform" />
+                    <span className="text-sm font-bold text-gray-800 leading-tight">{item.label}</span>
+                  </div>
+                  <span className="text-xs md:text-sm font-extrabold text-[#0D49CD] bg-white px-3 py-1 rounded-full border border-gray-200/60 shadow-2xs font-mono shrink-0">
+                    {item.price}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Pricing Note */}
